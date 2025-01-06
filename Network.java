@@ -69,15 +69,19 @@ public class Network {
         if (getUser(name1) == null || getUser(name2) == null) {
             return false;
         }
+        if (name1 == null || name2 == null) {
+            return false;
+        }
         String lowerName1 = name1.toLowerCase();
         String lowerName2 = name2.toLowerCase();
 
-        for (int i = 0; i < userCount; i++) {
-            if (lowerName1 == users[i].getName().toLowerCase()) {
-                return false;
-            } 
+        if (lowerName1.equals(lowerName2)) {
+            return false;
         }
-        getUser(lowerName1).addFollowee(lowerName2);
+        if (getUser(name1).follows(name2)) {
+            return false;
+        }
+        getUser(name1).addFollowee(name2);
         return true;
     }
     
@@ -90,7 +94,7 @@ public class Network {
 
         for (int i = 1; i < userCount; i++) {
             int currentValue = getUser(name).countMutual(users[i]);
-            if (users[i] == getUser(name)) {
+            if (users[i].getName().equals(name)) {
                 continue;
             }
             if (currentValue > maxMutual) {
@@ -98,13 +102,16 @@ public class Network {
                 mostRecommendedUserToFollow = users[i];
             } 
         }
-        return mostRecommendedUserToFollow.getName();
+        return mostRecommendedUserToFollow != null ? mostRecommendedUserToFollow.getName() : null;
     }
 
     /** Computes and returns the name of the most popular user in this network: 
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
         //// Replace the following statement with your code
+        if (userCount == 0) {
+            return null;
+        }
         String mostPopularUser = users[0].getName();
         for (int i = 0; i < userCount; i++) {
             if (followeeCount(mostPopularUser) < followeeCount(users[i].getName())) {
@@ -134,9 +141,10 @@ public class Network {
        if (userCount == 0) {
         return ans;
        }
-       for (int i = 0; i < userCount; i++) {
+       for (int i = 0; i < userCount - 1; i++) {
         ans = ans + users[i] + "\n"; 
        }
+       ans += users[userCount-1];
        return ans;
     }
 }

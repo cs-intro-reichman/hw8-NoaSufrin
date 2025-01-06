@@ -49,8 +49,8 @@
         }
         String lowerName = name.toLowerCase();
         
-        for (int i = 0; i < follows.length; i++) {
-            if (name.equals(follows[i])) {
+        for (int i = 0; i < fCount; i++) {
+            if (lowerName.equals(follows[i])) {
                 return true;
             }
         }
@@ -83,7 +83,9 @@
             return false;
         }
         String lowerName = name.toLowerCase();
-        
+        if (!follows(lowerName)) {
+            return false;
+        }
         for (int i = 0; i < follows.length; i++) {
             if (lowerName.equals(follows[i]) && follows[i] != null) {
                 for (int j = i; j < follows.length - 1; j++) {

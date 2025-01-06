@@ -142,8 +142,8 @@ public class Network {
        String ans = "Network:";
        if (userCount == 0) {
         return ans;
-        ans += "\n"
        }
+       ans += "\n";
        for (int i = 0; i < userCount - 1; i++) {
         ans = ans + users[i] + "\n"; 
        }

@@ -87,7 +87,7 @@
             return false;
         }
         for (int i = 0; i < follows.length; i++) {
-            if (lowerName.equals(follows[i]) && follows[i] != null) {
+            if (lowerName.equals(follows[i].toLowerCase()) && follows[i] != null) {
                 for (int j = i; j < follows.length - 1; j++) {
                     follows[j] = follows[j + 1];
                 }

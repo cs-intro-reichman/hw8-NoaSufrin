@@ -66,19 +66,19 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
-        if (getUser(name1) == null || getUser(name2) == null) {
+        User user1 = getUser(name1);
+        User user2 = getUser(name2);
+
+        if (user1 == null || user2 == null) {
             return false;
         }
         if (name1 == null || name2 == null) {
             return false;
         }
-        String lowerName1 = name1.toLowerCase();
-        String lowerName2 = name2.toLowerCase();
-
-        if (lowerName1.equals(lowerName2)) {
+        if (name1.toLowerCase().equals(name2.toLowerCase())) {
             return false;
         }
-        if (getUser(name1).follows(name2)) {
+        if (user1.follows(name2)) {
             return false;
         }
         getUser(name1).addFollowee(name2);

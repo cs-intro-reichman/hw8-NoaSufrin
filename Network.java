@@ -51,6 +51,11 @@ public class Network {
         if (getUser(name) != null) {
             return false;
         }
+        for (int i = 0; i < userCount; i++) {
+            if (name == users[i].getName()) {
+                return false;
+            }    
+        }
         users[userCount] = new User(name);
         userCount++;
         return true;

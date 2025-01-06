@@ -78,9 +78,6 @@ public class Network {
         if (name1.toLowerCase().equals(name2.toLowerCase())) {
             return false;
         }
-        if (user1.follows(name2)) {
-            return false;
-        }
         return user1.addFollowee(name2);
     }
     

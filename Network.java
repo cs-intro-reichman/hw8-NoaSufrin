@@ -48,11 +48,11 @@ public class Network {
         if (userCount == users.length) {
             return false;
         }
-        if (getUser(name) != null) {
+        if (name == null) {
             return false;
         }
         for (int i = 0; i < userCount; i++) {
-            if (name == users[i].getName()) {
+            if (name.equals(users[i].getName())) {
                 return false;
             }    
         }

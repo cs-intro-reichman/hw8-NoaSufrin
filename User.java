@@ -70,7 +70,7 @@
         if (fCount >= maxfCount) {
             return false;
         }
-        follows[fCount] = lowerName;
+        follows[fCount] = name;
         fCount++;
         return true;
     }

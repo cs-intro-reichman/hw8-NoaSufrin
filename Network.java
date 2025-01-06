@@ -89,20 +89,22 @@ public class Network {
      *  the user that has the maximal mutual number of followees as the user with the given name. */
     public String recommendWhoToFollow(String name) {
         //// Replace the following statement with your code
-        int maxMutual = getUser(name).countMutual(users[0]);
-        User mostRecommendedUserToFollow = users[0];
-
-        for (int i = 1; i < userCount; i++) {
-            int currentValue = getUser(name).countMutual(users[i]);
+        if (getUser(name) == null) {
+            return null;
+        }
+        User mostRecommendedUserToFollow = null;
+        int mutualFriends = -1;
+        for (int i = 0; i < userCount; i++) {
             if (users[i].getName().equals(name)) {
                 continue;
             }
-            if (currentValue > maxMutual) {
-                maxMutual = currentValue;
+            int currentMutualFriends = getUser(name).countMutual(users[i]);
+            if (currentMutualFriends > mutualFriends) {
+                mutualFriends = currentMutualFriends;
                 mostRecommendedUserToFollow = users[i];
-            } 
+            }
         }
-        return mostRecommendedUserToFollow != null ? mostRecommendedUserToFollow.getName() : null;
+        return mostRecommendedUserToFollow.getName();
     }
 
     /** Computes and returns the name of the most popular user in this network: 
@@ -137,9 +139,10 @@ public class Network {
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
        //// Replace the following statement with your code
-       String ans = "Network:\n";
+       String ans = "Network:";
        if (userCount == 0) {
         return ans;
+        ans += "\n"
        }
        for (int i = 0; i < userCount - 1; i++) {
         ans = ans + users[i] + "\n"; 
